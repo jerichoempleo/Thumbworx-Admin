@@ -22,8 +22,8 @@ return new class extends Migration
             $table->unsignedTinyInteger('age');
             $table->string('user_type');
             $table->string('email')->unique();
-            $table->string('phone_number1'); // Added phone_number1
-            $table->string('phone_number2'); // Added phone_number2
+            $table->string('phone_number1'); 
+            $table->string('phone_number2');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable(); //Nilagyan ko ng null pero pag nimigrate wala
             $table->rememberToken();

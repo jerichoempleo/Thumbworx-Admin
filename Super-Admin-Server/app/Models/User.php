@@ -17,10 +17,49 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
+    protected $table = 'users'; //Database Table
+    protected $primaryKey = 'id'; //The primary key
     protected $fillable = [
-        'name',
+
+        'first_name',
+        'middle_name',
+        'last_name',
+        'birth_date',
+        'gender',
+        'marital_status',
+        'age',
+        'user_type',
         'email',
-        'password',
+        'phone_number1',
+        'phone_number2',
+        //   'email_verified_at',
+        // 'password',
+        //  'remember_token',
+        'per_house_number',
+        'per_street',
+        'per_barangay',
+        'per_city',
+        'per_province',
+        'per_region',
+        'per_country',
+        'per_zip_code',
+        'cur_house_number',
+        'cur_street',
+        'cur_barangay',
+        'cur_city',
+        'cur_province',
+        'cur_region',
+        'cur_country',
+        'cur_zip_code',
+        'full_name',
+        'relationship',
+        'rel_phone_number',
+        'rel_email',
+        'address',
+        'license',
+        'nbi_clearance',
+        'lto_driving_history',
     ];
 
     /**

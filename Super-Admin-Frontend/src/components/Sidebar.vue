@@ -16,7 +16,7 @@
 				<span class="material-icons">dashboard</span>
 				<span class="text">Dashboard</span>
 			</router-link>
-			<router-link to="/DriverAccount" class="button">
+			<router-link to="/UserAccount" class="button">
 				<!-- material-icons = icon-->
 				<span class="material-icons">group</span> 
 				<span class="text">Account</span>

@@ -22,8 +22,8 @@
           <td>{{ user.phone_number1 }}</td>
           <td>{{ getStatusDisplay(user.account_status) }}</td>
           <td>
-            <!-- Getting the specific ID -->
-            <router-link :to="'/view/' + user.id">View</router-link> 
+            <!-- Getting the specific ID | Ikaw bahala mag customize ng url -->
+            <router-link :to="'/UserDetails/' + user.id">View</router-link> 
           </td>
         </tr>
       </tbody>

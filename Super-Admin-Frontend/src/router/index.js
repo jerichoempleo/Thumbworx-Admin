@@ -1,3 +1,4 @@
+//This file is where to redirecting to other pages
 import { createRouter, createWebHistory } from 'vue-router'
 import Dashboard from '../views/Dashboard.vue'
 
@@ -20,7 +21,7 @@ const router = createRouter({
 			component: () => import('../views/Logs.vue')
 		},
 		{
-			path: '/view/:id',
+			path: '/UserDetails/:id',
 			component: UserView,
 			props: true // Pass route params as props to ViewPage component
 		  }

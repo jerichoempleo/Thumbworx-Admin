@@ -1,5 +1,4 @@
 <template>
-    <form>
         <fieldset>
             <legend>Driver Details</legend>
 			<div>
@@ -196,36 +195,54 @@
 			</div>
 
 			
-
-            <button type="submit" class="btn btn-primary">Approve</button>
+            <!-- triggers the approveUser method -->
+            <button class="btn btn-primary" @click="approveUser(userDetails)">Approve</button> 
 			<button type="submit" class="btn btn-primary">Deny</button>
         </fieldset>
-    </form>
+
 </template>
 
 
 <script>
-import axios from 'redaxios'; //to import an HTTP client library (redaxios) that will be used for making HTTP requests within the Vue.js component.
+import axios from 'redaxios';
 
 export default {
+  name: "UserDetails",
   data() {
     return {
-      userDetails: null //Sariling gawa na "userDetails". Null because bago ifetch ng API wala munang laman. Kapag meron na edi hindi na null
+      userDetails: {},
+      result: {
+        account_status: "" //Eto lang nakalagay kasi eto lang naman ung inupdate or current need tawagin sa database
+      },
     };
   },
   created() {
-    // Fetch user details when component is created
     this.fetchUserDetails();
   },
   methods: {
     fetchUserDetails() {
-      const userId = this.$route.params.id; // Get user ID from route parameters
+      const userId = this.$route.params.id;
       axios.get(`http://127.0.0.1:8000/api/user/${userId}`).then(response => {
-        this.userDetails = response.data; // Set user data to display in the template
+        this.userDetails = response.data;
       }).catch(error => {
         console.error('Error fetching user details:', error);
       });
-    }
+    },
+    approveUser(userDetails) {
+  // Update the account_status to 1
+  userDetails.account_status = 1;
+  // Make a PUT request to update the user details including the account_status
+  axios.put(`http://127.0.0.1:8000/api/user/${userDetails.id}`, userDetails)
+    .then(response => {
+      console.log('User approved successfully:', response.data);
+      // Show alert that the account has been approved
+      alert('Account has been approved!');
+      // Assuming you want to fetch updated user details after approval
+      this.fetchUserDetails();
+    }).catch(error => {
+      console.error('Error approving user:', error);
+    });
+}
   }
 };
 </script>

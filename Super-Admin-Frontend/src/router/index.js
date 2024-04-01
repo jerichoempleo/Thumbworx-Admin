@@ -3,7 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Dashboard from '../views/Dashboard.vue'
 
 import UserAccount from '../views/UserAccount.vue';
-import UserView from '../views/UserView.vue'; 
+import UserDetails from '../views/UserDetails.vue'; 
 
 const router = createRouter({
 	history: createWebHistory(),
@@ -13,7 +13,7 @@ const router = createRouter({
 			component: Dashboard
 		},
 		{
-			path: '/UserAccount',
+			path: '/UserAccount', 
 			component: UserAccount
 		  },
 		{
@@ -22,7 +22,7 @@ const router = createRouter({
 		},
 		{
 			path: '/UserDetails/:id',
-			component: UserView,
+			component: UserDetails,
 			props: true // Pass route params as props to ViewPage component
 		  }
 	],

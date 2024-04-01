@@ -67,7 +67,7 @@ export default { //provides a more modular and organized way to define multiple 
         case 2:
           return "Active";
         default:
-          return accountStatus; // Return status as is if not matched
+          return accountStatus; // Return status as is if not matched | lalabas lng ung number
       }
     },
   },

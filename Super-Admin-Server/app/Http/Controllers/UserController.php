@@ -47,8 +47,15 @@ class UserController extends Controller
 
     public function approveAccount(string $id)
     {
-        $user = $this->user->find($id); // Assuming $this->user is your User model instance
+        $user = $this->user->find($id); //  $this->user is User model instance
         $user->update(['account_status' => 1]); // Update account_status to 1
+        return $user;
+    }
+
+    public function denyAccount(string $id)
+    {
+        $user = $this->user->find($id); //  $this->user is User model instance
+        $user->update(['account_status' => 2]); // Update account_status to 2
         return $user;
     }
     

@@ -12,4 +12,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::apiResource('/user', UserController::class); //url for UserController || define routes for CRUD operations 
 
 // Route to approve account
-Route::put('/user/approve/{id}', [UserController::class, 'approveAccount']);
+Route::put('/user/approve/{id}', [UserController::class, 'approveAccount']); //Dito ung reference na galing sa UserController.php
+
+// Route to approve account
+Route::put('/user/deny/{id}', [UserController::class, 'denyAccount']); //Dito ung reference na galing sa UserController.php

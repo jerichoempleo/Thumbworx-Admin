@@ -32,7 +32,7 @@
 </template>
 
 <script>
-//Bawal tanggaling ung script tag para makita pa rin display kasi part sya ng default code
+//Bawal tanggalin ung script tag para makita pa rin display kasi part sya ng default code
 import axios from "redaxios";
 
 export default { //provides a more modular and organized way to define multiple data properties within a component
@@ -65,6 +65,8 @@ export default { //provides a more modular and organized way to define multiple 
         case 1:
           return "Onboarding";
         case 2:
+          return "Denied";
+        case 3:
           return "Active";
         default:
           return accountStatus; // Return status as is if not matched | lalabas lng ung number

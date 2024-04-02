@@ -197,7 +197,7 @@
 			
             <!-- triggers the approveUser method -->
             <button class="btn btn-primary" @click="approveUser(userDetails)">Approve</button> 
-			<button type="submit" class="btn btn-primary">Deny</button>
+            <button class="btn btn-primary" @click="denyUser(userDetails)">Deny</button>
         </fieldset>
 
 </template>
@@ -228,6 +228,7 @@ export default {
         console.error('Error fetching user details:', error);
       });
     },
+
     approveUser(userDetails) {
   // Update the account_status to 1
   userDetails.account_status = 1;
@@ -237,10 +238,26 @@ export default {
       console.log('User approved successfully:', response.data);
       // Show alert that the account has been approved
       alert('Account has been approved!');
-      // Assuming you want to fetch updated user details after approval
+      //  fetch updated user details after approval
       this.fetchUserDetails();
     }).catch(error => {
       console.error('Error approving user:', error);
+    });
+},
+
+denyUser(userDetails) {
+  // Update the account_status to 2
+  userDetails.account_status = 2;
+  // Make a PUT request to update the user details including the account_status
+  axios.put(`http://127.0.0.1:8000/api/user/${userDetails.id}`, userDetails)
+    .then(response => {
+      console.log('User denied successfully:', response.data);
+      // Show alert that the account has been approved
+      alert('Account has been denied!');
+      // fetch updated user details after approval
+      this.fetchUserDetails();
+    }).catch(error => {
+      console.error('Error denying user:', error);
     });
 }
   }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\UserController; //Walang API na folder directory
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MailController;
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -16,3 +17,6 @@ Route::put('/user/approve/{id}', [UserController::class, 'approveAccount']); //D
 
 // Route to approve account
 Route::put('/user/deny/{id}', [UserController::class, 'denyAccount']); //Dito ung reference na galing sa UserController.php
+
+Route::post('/user/send-account-denied-email', [MailController::class, 'sendAccountDeniedEmail']); //icheck kung need ng id dito
+

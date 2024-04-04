@@ -61,7 +61,7 @@ export default { //provides a more modular and organized way to define multiple 
       // Convert integer status to display text
       switch (accountStatus) {
         case 0:
-          return "Pending";
+          return "Pending";z
         case 1:
           return "Onboarding";
         case 2:

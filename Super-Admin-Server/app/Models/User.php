@@ -33,6 +33,7 @@ class User extends Authenticatable
         'email',
         'phone_number1',
         'phone_number2',
+        'password',
         //   'email_verified_at',
         // 'password',
         //  'remember_token',

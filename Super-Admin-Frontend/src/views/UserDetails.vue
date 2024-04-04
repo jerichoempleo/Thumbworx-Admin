@@ -212,8 +212,9 @@ export default {
     return {
       userDetails: {},
       result: {
-        account_status: "" //Eto lang nakalagay kasi eto lang naman ung inupdate or current need tawagin sa database
-      },
+        account_status: "", //Eto lang nakalagay kasi eto lang naman ung inupdate or current need tawagin sa database
+        email: ""
+        },
     };
   },
   created() {
@@ -246,20 +247,25 @@ export default {
 },
 
 denyUser(userDetails) {
-  // Update the account_status to 2
   userDetails.account_status = 2;
-  // Make a PUT request to update the user details including the account_status
   axios.put(`http://127.0.0.1:8000/api/user/${userDetails.id}`, userDetails)
     .then(response => {
       console.log('User denied successfully:', response.data);
-      // Show alert that the account has been approved
       alert('Account has been denied!');
-      // fetch updated user details after approval
+      // Send denial email
+      axios.post(`http://127.0.0.1:8000/api/user/send-account-denied-email`, { email: userDetails.email }) //Tawagin ung url sa API Testing
+        .then(emailResponse => {
+          console.log('Denial email sent successfully:', emailResponse.data);
+        }).catch(emailError => {
+          console.error('Error sending denial email:', emailError);
+        });
+      // fetch updated user details after denial
       this.fetchUserDetails();
     }).catch(error => {
       console.error('Error denying user:', error);
     });
 }
-  }
+
+  } //end before method
 };
 </script>

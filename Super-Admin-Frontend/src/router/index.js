@@ -4,6 +4,7 @@ import Dashboard from '../views/Dashboard.vue'
 
 import UserAccount from '../views/UserAccount.vue';
 import UserDetails from '../views/UserDetails.vue'; 
+import ReviseDocuments from '../views/ReviseDocuments.vue'; 
 
 const router = createRouter({
 	history: createWebHistory(),
@@ -24,7 +25,11 @@ const router = createRouter({
 			path: '/UserDetails/:id',
 			component: UserDetails,
 			props: true // Pass route params as props to ViewPage component
-		  }
+		  },
+		{
+			path: '/ReviseDocuments',
+			component: ReviseDocuments,
+		},
 	],
 })
 

@@ -239,6 +239,13 @@ export default {
       console.log('User approved successfully:', response.data);
       // Show alert that the account has been approved
       alert('Account has been approved!');
+       // Send denial email
+       axios.post(`http://127.0.0.1:8000/api/user/send-account-approved-email`, { email: userDetails.email }) //Tawagin ung url sa API Testing
+        .then(emailResponse => {
+          console.log('Approval email sent successfully:', emailResponse.data);
+        }).catch(emailError => {
+          console.error('Error sending approval email:', emailError);
+        });
       //  fetch updated user details after approval
       this.fetchUserDetails();
     }).catch(error => {

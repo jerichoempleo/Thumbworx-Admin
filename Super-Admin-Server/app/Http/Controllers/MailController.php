@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Mail\AccountDeniedMail;
+use App\Mail\AccountApprovedMail;
 use Illuminate\Http\Request;
 use Mail;
 
@@ -19,5 +20,19 @@ class MailController extends Controller
         Mail::to($email)->send(new AccountDeniedMail($mailData));
 
         return response()->json(['message' => 'Account denied email sent successfully'], 200);
+    }
+
+    public function sendAccountApprovedEmail(Request $request)
+    {
+        $email = $request->input('email');
+
+        $approvedMailData = [
+            'title' => 'Account Approved',
+            'body' => 'Your account has been approved.',
+        ];
+
+        Mail::to($email)->send(new AccountApprovedMail($approvedMailData));
+
+        return response()->json(['message' => 'Account approved email sent successfully'], 200);
     }
 }

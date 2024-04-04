@@ -20,3 +20,5 @@ Route::put('/user/deny/{id}', [UserController::class, 'denyAccount']); //Dito un
 
 Route::post('/user/send-account-denied-email', [MailController::class, 'sendAccountDeniedEmail']); //icheck kung need ng id dito
 
+Route::post('/user/send-account-approved-email', [MailController::class, 'sendAccountApprovedEmail']); //icheck kung need ng id dito
+

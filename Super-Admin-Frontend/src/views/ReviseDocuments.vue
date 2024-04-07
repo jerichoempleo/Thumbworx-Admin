@@ -33,9 +33,7 @@ export default {
   data() {
     return {
       existingDocuments: {
-        license: 'https://example.com/license.pdf',
-        nbi_clearance: 'https://example.com/nbi_clearance.pdf',
-        lto_driving_history: 'https://example.com/lto_driving_history.pdf'
+    
       }
     };
   }

@@ -10,8 +10,8 @@
 
     <p>{{ $approvedMailData['body'] }}</p>
 
-    <p>Username: </p>
-    <p>Password: </p>
+    <p>Username: {{ $approvedMailData['email'] }}</p>
+    <p>Password: {{ $approvedMailData['password'] }}</p>
 
     <p>Thank You.</p>
 

@@ -25,10 +25,13 @@ class MailController extends Controller
     public function sendAccountApprovedEmail(Request $request)
     {
         $email = $request->input('email');
+        $password = $request->input('password');
 
         $approvedMailData = [
             'title' => 'Account Approved',
             'body' => 'Your account has been approved.',
+            'email' => $email, // Connecting and calling the email from the database
+            'password' => $password, // Connecting and calling the password from the database
         ];
 
         Mail::to($email)->send(new AccountApprovedMail($approvedMailData));

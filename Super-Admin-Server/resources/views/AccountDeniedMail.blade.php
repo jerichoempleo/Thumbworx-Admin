@@ -17,7 +17,7 @@
     cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
     proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
-    <a href="http://localhost:5173/ReviseDocuments">Revise Documents</a>
+    <a href="http://localhost:5173/ReviseDocuments?token={{ $mailData['token'] }}">Revise Documents</a>
 
     <p>Thank You.</p>
 

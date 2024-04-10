@@ -3,24 +3,31 @@
 namespace App\Http\Controllers;
 use App\Mail\AccountDeniedMail;
 use App\Mail\AccountApprovedMail;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Mail;
 
 class MailController extends Controller
 {
-     public function sendAccountDeniedEmail(Request $request)
+    public function sendAccountDeniedEmail(Request $request)
     {
         $email = $request->input('email');
-
+        $token = $request->input('token'); // Get the token from the request
+    
         $mailData = [
             'title' => 'Account Denied',
             'body' => 'A request to update the denied documents.',
+            'token' => $token, // Pass the token to the email template
         ];
-
+    
+        // Update the token in the database
+        User::where('email', $email)->update(['token' => $token]);
+    
         Mail::to($email)->send(new AccountDeniedMail($mailData));
-
+    
         return response()->json(['message' => 'Account denied email sent successfully'], 200);
     }
+    
 
     public function sendAccountApprovedEmail(Request $request)
     {
@@ -38,4 +45,6 @@ class MailController extends Controller
 
         return response()->json(['message' => 'Account approved email sent successfully'], 200);
     }
+
+    
 }

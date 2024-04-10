@@ -58,6 +58,20 @@ class UserController extends Controller
         $user->update(['account_status' => 2]); // Update account_status to 2
         return $user;
     }
+
+    //method for revise document token
+    public function validateToken(string $token)
+    {
+        $user = $this->user->where('token', $token)->first();
+
+        if ($user) {
+            return response()->json(['valid' => true], 200);
+        } else {
+            return response()->json(['valid' => false], 404);
+        }
+    }
+
+    
     
 
 }

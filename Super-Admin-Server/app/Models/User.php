@@ -61,7 +61,9 @@ class User extends Authenticatable
         'license',
         'nbi_clearance',
         'lto_driving_history',
-        'account_status'
+        'account_status',
+        'token',
+        'token_expires_at',
     ];
 
     /**

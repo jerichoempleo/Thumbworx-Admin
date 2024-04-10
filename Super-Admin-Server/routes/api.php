@@ -15,10 +15,15 @@ Route::apiResource('/user', UserController::class); //url for UserController || 
 // Route to approve account
 Route::put('/user/approve/{id}', [UserController::class, 'approveAccount']); //Dito ung reference na galing sa UserController.php
 
-// Route to approve account
+// Route to deny account
 Route::put('/user/deny/{id}', [UserController::class, 'denyAccount']); //Dito ung reference na galing sa UserController.php
 
 Route::post('/user/send-account-denied-email', [MailController::class, 'sendAccountDeniedEmail']); //icheck kung need ng id dito
 
 Route::post('/user/send-account-approved-email', [MailController::class, 'sendAccountApprovedEmail']); //icheck kung need ng id dito
+
+//Route in validating the token in Revise Documents.
+Route::get('/user/validate-token/{token}', [UserController::class, 'validateToken']);
+
+
 

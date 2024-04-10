@@ -25,10 +25,7 @@
 				<span class="material-icons">description</span>
 				<span class="text">Logs</span>
 			</router-link>
-			<router-link to="/ReviseDocuments" class="button">
-				<span class="material-icons">description</span>
-				<span class="text">Revise Documents</span>
-			</router-link>
+			
 		</div>
 
 		<div class="flex"></div>

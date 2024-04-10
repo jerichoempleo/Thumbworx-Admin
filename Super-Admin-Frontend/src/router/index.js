@@ -5,6 +5,7 @@ import Dashboard from '../views/Dashboard.vue'
 import UserAccount from '../views/UserAccount.vue';
 import UserDetails from '../views/UserDetails.vue'; 
 import ReviseDocuments from '../views/ReviseDocuments.vue'; 
+import Logs from '../views/Logs.vue';
 
 const router = createRouter({
 	history: createWebHistory(),
@@ -19,7 +20,7 @@ const router = createRouter({
 		  },
 		{
 			path: '/Logs',
-			component: () => import('../views/Logs.vue')
+			component: Logs
 		},
 		{
 			path: '/UserDetails/:id',

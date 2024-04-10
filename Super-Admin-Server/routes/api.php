@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LogsController;
 use App\Http\Controllers\UserController; //Walang API na folder directory
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -9,6 +10,8 @@ use App\Http\Controllers\MailController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+//--Routes for Users--
 
 Route::apiResource('/user', UserController::class); //url for UserController || define routes for CRUD operations 
 
@@ -24,6 +27,9 @@ Route::post('/user/send-account-approved-email', [MailController::class, 'sendAc
 
 //Route in validating the token in Revise Documents.
 Route::get('/user/validate-token/{token}', [UserController::class, 'validateToken']);
+
+//--Routes for Logs--
+Route::apiResource('/logs', LogsController::class); //url for LogsController || define routes for CRUD operations 
 
 
 

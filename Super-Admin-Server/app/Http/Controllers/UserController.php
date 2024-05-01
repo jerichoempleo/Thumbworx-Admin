@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Hash; // For hashing
+use Illuminate\Support\Str; // Import the Str class
 
 class UserController extends Controller
 {
@@ -71,6 +73,24 @@ class UserController extends Controller
         }
     }
 
+    public function generateRandomPassword(Request $request, $id)
+    {
+        // Generate a random password
+        $randomPassword = Str::random(8); // Generates an 8-character random alphanumeric password
+        
+        // Hash the generated password
+        $hashedPassword = Hash::make($randomPassword);
+        
+        // Find the user by ID
+        $user = User::findOrFail($id);
+        
+        // Update the user's password field with the hashed password
+        $user->password = $hashedPassword;
+        $user->save(); // Save the user
+        
+        // Return response
+        return response()->json(['password' => $randomPassword, 'hashed_password' => $hashedPassword], 200);
+    }
     
     
 

@@ -468,48 +468,56 @@ export default {
     },
 
     approveUser(userDetails) {
-      // Update the account_status to 1
-      userDetails.account_status = 1;
+    // Make a POST request to UserController's endpoint to generate the random password
+    axios
+      .post(`http://127.0.0.1:8000/api/user/generate-random-password/${userDetails.id}`)
+      .then((response) => {
+        console.log("Password generated successfully:", response.data);
 
-      // Generate a random password
-      const randomPassword = Math.random().toString(36).slice(-8); // Generates an 8-character random alphanumeric password
+        // Update the account_status to 1
+        userDetails.account_status = 1;
 
-      // Set the generated password to userDetails.password
-      userDetails.password = randomPassword;
+        // Store the unhashed password
+        const unhashedPassword = response.data.password;
 
-      // Make a PUT request to update the user details including the account_status and password
-      axios
-        .put(`http://127.0.0.1:8000/api/user/${userDetails.id}`, userDetails)
-        .then((response) => {
-          console.log("User approved successfully:", response.data);
-          // Show alert that the account has been approved
-          alert(
-            "Account has been approved and a random password has been generated!"
-          );
+        // Make a PUT request to update the user details including the account_status and hashed password
+        axios
+          .put(`http://127.0.0.1:8000/api/user/${userDetails.id}`, userDetails)
+          .then((response) => {
+            console.log("User approved successfully:", response.data);
+            // Show alert that the account has been approved
+            alert("Account has been approved!");
 
-          // Send approval email
-          axios
-            .post(
-              `http://127.0.0.1:8000/api/user/send-account-approved-email`,
-              { email: userDetails.email, password: randomPassword }
-            )
-            .then((emailResponse) => {
-              console.log(
-                "Approval email sent successfully:",
-                emailResponse.data
-              );
-            })
-            .catch((emailError) => {
-              console.error("Error sending approval email:", emailError);
-            });
+            // Send approval email with unhashed password
+            axios
+              .post(
+                `http://127.0.0.1:8000/api/user/send-account-approved-email`,
+                { 
+                  email: userDetails.email, 
+                  password: unhashedPassword
+                }
+              )
+              .then((emailResponse) => {
+                console.log(
+                  "Approval email sent successfully:",
+                  emailResponse.data
+                );
+              })
+              .catch((emailError) => {
+                console.error("Error sending approval email:", emailError);
+              });
 
-          // Fetch updated user details after approval
-          this.fetchUserDetails();
-        })
-        .catch((error) => {
-          console.error("Error approving user:", error);
-        });
-    },
+            // Fetch updated user details after approval
+            this.fetchUserDetails();
+          })
+          .catch((error) => {
+            console.error("Error approving user:", error);
+          });
+      })
+      .catch((error) => {
+        console.error("Error generating random password:", error);
+      });
+},
 
     denyUser(userDetails) {
       userDetails.account_status = 2;

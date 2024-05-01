@@ -6,21 +6,25 @@ import UserAccount from '../views/UserAccount.vue';
 import UserDetails from '../views/UserDetails.vue'; 
 import ReviseDocuments from '../views/ReviseDocuments.vue'; 
 import Logs from '../views/Logs.vue';
+import Login from '../views/Login.vue';
 
 const router = createRouter({
 	history: createWebHistory(),
 	routes: [
 		{
 			path: '/',
-			component: Dashboard
+			component: Dashboard,
+			name: 'Dashboard'
 		},
 		{
 			path: '/UserAccount', 
-			component: UserAccount
+			component: UserAccount,
+			name: 'UserAccount'
 		  },
 		{
 			path: '/Logs',
-			component: Logs
+			component: Logs,
+			name: 'Logs'
 		},
 		{
 			path: '/UserDetails/:id',
@@ -31,6 +35,10 @@ const router = createRouter({
 			path: '/ReviseDocuments',
 			component: ReviseDocuments,
 		},
+		{
+			path: '/Login', 
+			component: Login
+		  },
 	],
 })
 

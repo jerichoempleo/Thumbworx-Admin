@@ -31,6 +31,14 @@ Route::get('/user/validate-token/{token}', [UserController::class, 'validateToke
 
 Route::post('/user/generate-random-password/{id}', [UserController::class, 'generateRandomPassword']);
 
+//Route for Dashboard
+Route::get('/total-client-users-count', [UserController::class, 'getTotalClientUsersCount']);
+
+Route::get('/total-driver-users-count', [UserController::class, 'getTotalDriverUsersCount']);
+
+Route::get('/total-helper-users-count', [UserController::class, 'getTotalHelperUsersCount']);
+
+
 //----------------------------------Routes for Logs--------------------------------
 Route::apiResource('/logs', LogsController::class); //url for LogsController || define routes for CRUD operations 
 

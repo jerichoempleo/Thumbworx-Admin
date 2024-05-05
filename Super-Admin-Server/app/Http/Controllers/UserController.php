@@ -10,11 +10,12 @@ use Illuminate\Support\Str; // Import the Str class
 
 class UserController extends Controller
 {
- 
+
     protected $user;
-    public function __construct(){
+    public function __construct()
+    {
         $this->user = new User(); //Connecting to User model
-        
+
     }
 
     public function index()
@@ -28,13 +29,13 @@ class UserController extends Controller
         //
     }
 
-  
+
     public function show(string $id)
     {
-     return $user = $this->user->find($id);  
+        return $user = $this->user->find($id);
     }
 
-  
+
     public function update(Request $request, string $id)
     {
         $user = User::findOrFail($id); // Find the user by ID
@@ -77,21 +78,39 @@ class UserController extends Controller
     {
         // Generate a random password
         $randomPassword = Str::random(8); // Generates an 8-character random alphanumeric password
-        
+
         // Hash the generated password
         $hashedPassword = Hash::make($randomPassword);
-        
+
         // Find the user by ID
         $user = User::findOrFail($id);
-        
+
         // Update the user's password field with the hashed password
         $user->password = $hashedPassword;
         $user->save(); // Save the user
-        
+
         // Return response
         return response()->json(['password' => $randomPassword, 'hashed_password' => $hashedPassword], 200);
     }
-    
-    
+
+    public function getTotalClientUsersCount()
+    {
+        $clientCount = $this->user->where('user_type', 'Client')->count(); // Get the count of users with user_type 'Client'
+        return response()->json(['total_client_users' => $clientCount], 200);
+    }
+
+    public function getTotalDriverUsersCount()
+    {
+        $driverCount = $this->user->where('user_type', 'Driver')->count(); // Get the count of users with user_type 'Client'
+        return response()->json(['total_driver_users' => $driverCount], 200);
+    }
+
+    public function getTotalHelperUsersCount()
+    {
+        $helperCount = $this->user->where('user_type', 'Helper')->count(); // Get the count of users with user_type 'Client'
+        return response()->json(['total_helper_users' => $helperCount], 200);
+    }
+
+
 
 }

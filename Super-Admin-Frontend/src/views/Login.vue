@@ -25,6 +25,7 @@ export default {
     return {
       email: '',
       password: '',
+      error: null,
     };
   },
   methods: {
@@ -35,17 +36,12 @@ export default {
           password: this.password,
         });
 
-        if (response.data.status === true) {
-          alert("Login Successfully");
-
-          // Make sure to define the route in your router setup
-          this.$router.push({ name: 'Dashboard' }); //this is for
-        } else {
-          alert("Login failed");
-        }
+        const { token } = response.data;
+        localStorage.setItem('token', token); // Store token securely in localStorage
+        this.$router.push({ name: 'Dashboard' }); // Redirect to dashboard page after login
       } catch (error) {
+        this.error = 'Invalid email or password';
         console.error('Error:', error);
-        alert("Error, please try again");
       }
     },
   },

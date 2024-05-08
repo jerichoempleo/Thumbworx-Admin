@@ -26,13 +26,16 @@ class ApiController extends Controller
             "password" => $request->password
         ]);
 
-        if(!empty($token)){
+        if (!empty($token)) {
+            // Check if the user is an admin
+            $isAdmin = auth()->user()->user_type === 'Admin'; // Assuming 'admin' is the value for admin users
 
             //Eto ung lumalabas kapag successful yung login
             return response()->json([
                 "status" => true,
-                "message" => "User logged in succcessfully",
-                "token" => $token //Generating random token
+                "message" => "User logged in successfully",
+                "token" => $token, //Generating random token
+                "isAdmin" => $isAdmin // Add isAdmin flag to the response
             ]);
         }
 
@@ -43,7 +46,7 @@ class ApiController extends Controller
     }
 
     //Profile API (GET) | Protected methods
-    public function profile(){
+    public function profile(){ //Kapag tinawag mo to ireread nya ung user details
 
         $userdata = auth()->user();
 

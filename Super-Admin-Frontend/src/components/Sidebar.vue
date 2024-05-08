@@ -12,7 +12,7 @@
 
 		<h3>Menu</h3>
 		<div class="menu">
-			<router-link to="/" class="button">
+			<router-link to="/Dashboard" class="button">
 				<span class="material-icons">dashboard</span>
 				<span class="text">Dashboard</span>
 			</router-link>
@@ -29,18 +29,20 @@
 		</div>
 
 		<div class="flex"></div>
-		
+			
 		<div class="menu">
-			<router-link to="" class="button">
+			<button @click="logout" class="button">
 				<span class="material-icons">logout</span>
 				<span class="text">Logout</span>
-			</router-link>
+			</button>
 		</div>
 	</aside>
 </template>
 
 <script setup>
 import { ref } from 'vue'
+import axios from 'redaxios'
+import router from '../router' // Para maredirect sa login or other pages kung want
 
 const is_expanded = ref(localStorage.getItem("is_expanded") === "true")
 
@@ -48,7 +50,45 @@ const ToggleMenu = () => {
 	is_expanded.value = !is_expanded.value
 	localStorage.setItem("is_expanded", is_expanded.value)
 }
+
+const logout = async () => {
+	try {
+		// Get the JWT token from localStorage
+		const token = localStorage.getItem('token')
+		if (!token) {
+			// Handle case where token is not available
+			console.error('JWT token not found in localStorage')
+			return
+		}
+
+		// Set the request headers
+		const headers = {
+			'Authorization': `Bearer ${token}`,
+			'Accept': 'application/json'
+		}
+
+		// Make the logout request
+		const response = await axios.get('http://127.0.0.1:8000/api/logout', {
+			headers: headers
+		})
+
+		// Check if logout was successful
+		if (response.data.status === true) {
+			// Remove token from localStorage
+			localStorage.removeItem('token')
+			// Redirect to login page
+			router.push({ name: 'Login' })
+		} else {
+			// Handle case where logout was not successful
+			console.error('Logout request failed:', response.data.message)
+		}
+	} catch (error) {
+		// Handle any errors
+		console.error('Error during logout request:', error)
+	}
+}
 </script>
+
 
 <style lang="scss" scoped>
 aside {
